@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Table Tennis Table Availability</title>
+	<style>
+		.container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin-top: 50px;
+		}
+		
+		.availability {
+			margin-top: 20px;
+			font-size: 24px;
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Table Tennis Table Availability</h1>
+		<div class="availability"></div>
+	</div>
+	
+	<script>
+		// Retrieve the availability data from the cloud
+		setInterval(() => {
+			fetch('https://example.com/availability')
+			.then(response => response.json())
+			.then(data => {
+				if (data.available) {
+					document.querySelector('.availability').textContent = 'The table is available!';
+				} else {
+					document.querySelector('.availability').textContent = 'The table is currently in use.';
+				}
+			})
+			.catch(error => {
+				document.querySelector('.availability').textContent = 'Error retrieving data. Please try again later.';
+			});
+		}, 5000); // Update every 5 seconds
+	</script>
+</body>
+</html>
