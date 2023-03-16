@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Occupancy status</title>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  <script>
+    // Initialize Firebase with your project's configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyDab5haURN3NOct9fga_zjZh6FpY_qTNl8",
+      authDomain: "recreation-places-availability.firebaseapp.com",
+      databaseURL: "https://recreation-places-availability-default-rtdb.firebaseio.com",
+      projectId: "recreation-places-availability",
+      storageBucket: "recreation-places-availability.appspot.com",
+      messagingSenderId: "381559849012",
+      appId: "1:381559849012:web:5079a96aaa44fe32ab0a61",
+      measurementId: "G-N6QQ55L383"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    // Get a reference to the database service and the "distance" node
+    var database = firebase.database();
+    var distanceRef = database.ref('distance');
+
+    // Listen for changes to the "distance" node
+    distanceRef.on('value', function(snapshot) {
+      // Get the distance value from the snapshot
+      var distance = snapshot.val();
+
+      // Update the HTML element with the distance value
+      var distanceEl = document.getElementById('distance');
+      distanceEl.innerText = distance;
+    });
+  </script>
+</head>
+<body>
+  <h1>Recreation Places Availability</h1>
+  <h2>Table tennis - Module 3</h2>
+  <p>The distance is: <span id="distance"></span></p>
+</body>
+</html>
